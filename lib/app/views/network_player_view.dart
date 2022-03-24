@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visivel/app/components/controls_overlay.dart';
+import 'package:visivel/app/components/video_player_widget.dart';
 
 class NetworkPlayerView extends StatefulWidget {
   const NetworkPlayerView({Key? key}) : super(key: key);
@@ -26,13 +27,12 @@ class NetworkPlayerViewState extends State<NetworkPlayerView> {
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
       closedCaptionFile: _loadCaptions(),
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-    );
-
-    _controller.addListener(() {
-      setState(() {});
-    });
-    _controller.setLooping(true);
-    _controller.initialize();
+    )
+      ..addListener(() {
+        setState(() {});
+      })
+      ..setLooping(true)
+      ..initialize();
   }
 
   @override
@@ -48,6 +48,14 @@ class NetworkPlayerViewState extends State<NetworkPlayerView> {
         children: <Widget>[
           Container(padding: const EdgeInsets.only(top: 20.0)),
           const Text('With remote mp4'),
+          VideoPlayerWigted(controller: _controller)
+        ],
+      ),
+    );
+  }
+}
+
+/*
           Container(
             padding: const EdgeInsets.all(20),
             child: AspectRatio(
@@ -63,8 +71,4 @@ class NetworkPlayerViewState extends State<NetworkPlayerView> {
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
+ */
